@@ -9,8 +9,6 @@ const Orderbook = () => {
   let { coin } = useParams();
 
   useEffect(() => {
-    console.log(coin);
-
     const ws = new WebSocket('wss://stream.binance.com:9443/ws');
 
     const msg = {
@@ -48,14 +46,10 @@ const Orderbook = () => {
             <thead className='text-xs border-t border-b border-opacity-25 text-info border-info bg-third'>
               <tr>
                 <th className='w-4/12 py-1 pl-2 font-medium text-left'>
-                  Price (USDT)
+                  Price
                 </th>
-                <th className='w-4/12 py-1 font-medium text-right'>
-                  Amount (BTC)
-                </th>
-                <th className='w-4/12 py-1 pr-2 font-medium text-right'>
-                  Sum(BTC)
-                </th>
+                <th className='w-4/12 py-1 font-medium text-right'>Amount</th>
+                <th className='w-4/12 py-1 pr-2 font-medium text-right'>Sum</th>
               </tr>
             </thead>
             <tbody>

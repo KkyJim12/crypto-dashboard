@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { NavLink, useParams } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import RightOutlined from '@ant-design/icons/RightOutlined';
 import SearchOutlined from '@ant-design/icons/SearchOutlined';
@@ -7,7 +6,6 @@ import MenuUnfoldOutlined from '@ant-design/icons/MenuUnfoldOutlined';
 import StarOulined from '@ant-design/icons/StarOutlined';
 
 const MarketList = (props) => {
-  let { coin } = useParams();
   const history = useHistory();
   const sideMenu = props.sideMenu;
   const changeSideMenu = props.changeSideMenu;
@@ -102,7 +100,7 @@ const MarketList = (props) => {
             </li>
           </ul>
           <span className='flex items-center pb-2 ml-auto text-minor'>
-            <RightOutlined />
+            {/* <RightOutlined /> */}
           </span>
         </div>
       </div>
