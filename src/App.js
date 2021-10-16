@@ -6,7 +6,10 @@ const App = () => {
     <Router>
       <div>
         <Switch>
-          <Route>
+          <Route path='/' exact>
+            <MainLayout />
+          </Route>
+          <Route path='/:id'>
             <MainLayout />
           </Route>
         </Switch>

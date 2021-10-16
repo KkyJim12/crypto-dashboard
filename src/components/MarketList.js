@@ -1,13 +1,20 @@
+import { NavLink, Link, useParams } from 'react-router-dom';
 import RightOutlined from '@ant-design/icons/RightOutlined';
 import SearchOutlined from '@ant-design/icons/SearchOutlined';
 import MenuUnfoldOutlined from '@ant-design/icons/MenuUnfoldOutlined';
 import StarOulined from '@ant-design/icons/StarOutlined';
 
 const MarketList = (props) => {
-  const data = props.data.filter((i) => i.s.includes('USDT'));
-  const sortData = [...data].sort((a, b) => (a.s > b.s ? 1 : -1));
+  let { id } = useParams();
+  let sortData = props.data;
   const sideMenu = props.sideMenu;
   const changeSideMenu = props.changeSideMenu;
+
+  const filterData = () => {
+    console.log(id);
+    sortData = sortData.filter((i) => i.s.includes(id));
+    sortData = [...sortData].sort((a, b) => (a.s > b.s ? 1 : -1));
+  };
 
   const largeSideMenu = (
     <div className='bg-main'>
@@ -32,21 +39,42 @@ const MarketList = (props) => {
 
         <div className='flex pt-2'>
           <ul className='flex text-sm lg:space-x-5 text-info'>
-            <li className='pb-2 border-b-2 border-main hover:border-orange'>
-              <a href='/'>Favorite</a>
-            </li>
-            <li className='pb-2 border-b-2 border-main hover:border-orange'>
-              <a href='/'>ETF</a>
-            </li>
-            <li className='pb-2 border-b-2 border-main hover:border-orange'>
-              <a href='/'>USDT</a>
-            </li>
-            <li className='pb-2 border-b-2 border-main hover:border-orange'>
-              <a href='/'>BTC</a>
-            </li>
-            <li className='pb-2 border-b-2 border-main hover:border-orange'>
-              <a href='/'>ETH</a>
-            </li>
+            <NavLink
+              className='pb-2 border-b-2 border-main hover:border-orange'
+              exact={true}
+              activeClassName='border-orange'
+              to='/favorite'
+              onClick={filterData()}
+            >
+              <li>Favorite</li>
+            </NavLink>
+            <NavLink
+              className='pb-2 border-b-2 border-main hover:border-orange'
+              exact={true}
+              activeClassName='border-orange'
+              to='/USDT'
+              onClick={filterData()}
+            >
+              <li>USDT</li>
+            </NavLink>
+            <NavLink
+              className='pb-2 border-b-2 border-main hover:border-orange'
+              exact={true}
+              activeClassName='border-orange'
+              to='/BTC'
+              onClick={filterData()}
+            >
+              <li>BTC</li>
+            </NavLink>
+            <NavLink
+              className='pb-2 border-b-2 border-main hover:border-orange'
+              exact={true}
+              activeClassName='border-orange'
+              to='/ETH'
+              onClick={filterData()}
+            >
+              <li>ETH</li>
+            </NavLink>
           </ul>
           <span className='flex items-center pb-2 ml-auto text-minor'>
             <RightOutlined />
@@ -107,7 +135,7 @@ const MarketList = (props) => {
           <MenuUnfoldOutlined />
         </button>
       </div>
-      <div className='py-1 text-base text-center text-white bg-third'>USD</div>
+      <div className='py-1 text-base text-center text-white bg-third'>{id}</div>
       <div className='py-1 text-sm text-center border-t border-b border-opacity-25 bg-main text-info border-info'>
         Market
       </div>
@@ -115,7 +143,7 @@ const MarketList = (props) => {
         className='flex flex-col overflow-y-scroll'
         style={{ height: '80vh' }}
       >
-        {data.map((item, index) => {
+        {sortData.map((item, index) => {
           return (
             <a key={item.s} href='/'>
               <div className='py-1 text-xs text-center text-white hover:bg-third'>
