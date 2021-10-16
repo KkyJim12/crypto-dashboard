@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom';
 import MainLayout from 'layouts/MainLayout';
 
 const App = () => {
@@ -7,7 +12,7 @@ const App = () => {
       <div>
         <Switch>
           <Route path='/' exact>
-            <MainLayout />
+            <Redirect to='/market/BTCUSDT' />
           </Route>
           <Route path='/market/:coin' exact>
             <MainLayout />

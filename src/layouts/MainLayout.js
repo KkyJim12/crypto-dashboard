@@ -59,7 +59,9 @@ const MainLayout = () => {
               sideMenu ? 'col-span-6' : 'col-span-7'
             } p-1 flex flex-col lg:space-y-1`}
           >
-            <div className='flex-1'></div>
+            <div className='flex-1'>
+              <Tradingview />
+            </div>
             <div className='flex-1'>
               <Exchange />
             </div>
