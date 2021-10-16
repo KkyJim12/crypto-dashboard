@@ -26,8 +26,6 @@ const MainLayout = () => {
     ws.onmessage = (event) => {
       let x = JSON.parse(event.data);
 
-      console.log(event);
-
       if (x.length > 0) {
         setMarketList(x);
       }

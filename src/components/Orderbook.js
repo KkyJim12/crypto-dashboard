@@ -1,49 +1,112 @@
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { useParams } from 'react-router';
+
 const Orderbook = () => {
+  const [bids, setBids] = useState([]);
+  const [ask, setAsk] = useState([]);
+
+  let { coin } = useParams();
+
+  useEffect(() => {
+    console.log(coin);
+
+    const ws = new WebSocket('wss://stream.binance.com:9443/ws');
+
+    const msg = {
+      method: 'SUBSCRIBE',
+      params: [`${coin.toLowerCase()}@depth20@1000ms`],
+      id: 1,
+    };
+
+    ws.onopen = () => {
+      ws.send(JSON.stringify(msg));
+    };
+
+    ws.onmessage = (event) => {
+      let x = JSON.parse(event.data);
+
+      if (x.bids !== undefined) {
+        setBids(x.bids);
+        setAsk(x.asks);
+      }
+    };
+
+    return () => {
+      ws.close();
+    };
+  }, [coin]);
+
   return (
     <>
-      <div className="flex flex-col h-full">
-        <div className="bg-main w-full h-1/2">
-          <div className="bg-third">
-            <h1 className="text-white py-2 px-3">Orderbook</h1>
+      <div className='flex flex-col h-full'>
+        <div className='w-full bg-main h-1/2'>
+          <div className='bg-third'>
+            <h1 className='px-3 py-2 text-white'>Orderbook</h1>
           </div>
-          <table className="table-fixed w-full">
-            <thead className="text-info text-xs border-b border-t border-info border-opacity-25 bg-third">
+          <table className='w-full table-fixed'>
+            <thead className='text-xs border-t border-b border-opacity-25 text-info border-info bg-third'>
               <tr>
-                <th className="font-medium w-4/12 text-left py-1 pl-2">
+                <th className='w-4/12 py-1 pl-2 font-medium text-left'>
                   Price (USDT)
                 </th>
-                <th className="font-medium w-4/12 py-1 text-right">
+                <th className='w-4/12 py-1 font-medium text-right'>
                   Amount (BTC)
                 </th>
-                <th className="font-medium w-4/12 py-1 pr-2 text-right">
+                <th className='w-4/12 py-1 pr-2 font-medium text-right'>
                   Sum(BTC)
                 </th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td className="text-danger text-left text-xs pl-2">
-                  56648.6897
-                </td>
-                <td className="text-info text-right text-xs">0.521002</td>
-                <td className="text-info text-right text-xs pr-2">1.25</td>
-              </tr>
+              {bids.map((item, index) => {
+                return (
+                  <tr key={index}>
+                    <td className='pl-2 text-xs text-left text-danger'>
+                      {parseFloat(item[0]).toFixed(6)}
+                    </td>
+                    <td className='text-xs text-right text-info'>
+                      {parseFloat(item[1]).toFixed(2)}
+                    </td>
+                    <td className='pr-2 text-xs text-right text-info'>
+                      {(
+                        parseFloat(item[0]).toFixed(6) *
+                        parseFloat(item[1]).toFixed(2)
+                      ).toFixed(4)}
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
-        <div className="bg-main w-full h-1/2">
-          <div className="bg-third">
-            <h1 className="text-white py-2 px-3">56672.7646 ≈ $56689.77</h1>
+        <div className='w-full bg-main h-1/2'>
+          <div className='bg-third'>
+            <h1 className='px-3 py-2 text-white'>
+              {ask.length > 0 && parseFloat(ask[0][0]).toFixed(4)} ≈{' '}
+              {ask.length > 0 && parseFloat(ask[0][0]).toFixed(2)}
+            </h1>
           </div>
-          <table className="table-fixed w-full">
+          <table className='w-full table-fixed'>
             <tbody>
-              <tr>
-                <td className="text-success text-left text-xs pl-2">
-                  56648.6897
-                </td>
-                <td className="text-info text-right text-xs">0.521002</td>
-                <td className="text-info text-right text-xs pr-2">1.25</td>
-              </tr>
+              {ask.map((item, index) => {
+                return (
+                  <tr key={index}>
+                    <td className='pl-2 text-xs text-left text-success'>
+                      {parseFloat(item[0]).toFixed(6)}
+                    </td>
+                    <td className='text-xs text-right text-info'>
+                      {parseFloat(item[1]).toFixed(2)}
+                    </td>
+                    <td className='pr-2 text-xs text-right text-info'>
+                      {(
+                        parseFloat(item[0]).toFixed(6) *
+                        parseFloat(item[1]).toFixed(2)
+                      ).toFixed(4)}
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>

@@ -1,19 +1,53 @@
-import { NavLink, Link, useParams } from 'react-router-dom';
+import { useState } from 'react';
+import { NavLink, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router';
 import RightOutlined from '@ant-design/icons/RightOutlined';
 import SearchOutlined from '@ant-design/icons/SearchOutlined';
 import MenuUnfoldOutlined from '@ant-design/icons/MenuUnfoldOutlined';
 import StarOulined from '@ant-design/icons/StarOutlined';
 
 const MarketList = (props) => {
-  let { id } = useParams();
-  let sortData = props.data;
+  let { coin } = useParams();
+  const history = useHistory();
   const sideMenu = props.sideMenu;
   const changeSideMenu = props.changeSideMenu;
 
-  const filterData = () => {
-    console.log(id);
-    sortData = sortData.filter((i) => i.s.includes(id));
-    sortData = [...sortData].sort((a, b) => (a.s > b.s ? 1 : -1));
+  const [market, setMarket] = useState('USDT');
+
+  const [usdtMarket, setUsdtMarket] = useState(true);
+  const [btcMarket, setBtcMarket] = useState(false);
+  const [ethMarket, setEthMarket] = useState(false);
+
+  let initData = props.data.filter((i) => i.s.includes(market));
+  let sortData = initData.sort((a, b) => (a.s > b.s ? 1 : -1));
+
+  const handleRowClick = (filterByCoin) => {
+    history.push(`/market/${filterByCoin}`);
+  };
+
+  const filterData = (filterByMarket) => {
+    // Set active class to link tabs
+    if (filterByMarket === 'USDT') {
+      setUsdtMarket(true);
+      setBtcMarket(false);
+      setEthMarket(false);
+    }
+
+    if (filterByMarket === 'BTC') {
+      setUsdtMarket(false);
+      setBtcMarket(true);
+      setEthMarket(false);
+    }
+
+    if (filterByMarket === 'ETH') {
+      setUsdtMarket(false);
+      setBtcMarket(false);
+      setEthMarket(true);
+    }
+
+    setMarket(filterByMarket);
+    sortData.filter((i) => i.s.includes(filterByMarket));
+    sortData.sort((a, b) => (a.s > b.s ? 1 : -1));
   };
 
   const largeSideMenu = (
@@ -39,42 +73,33 @@ const MarketList = (props) => {
 
         <div className='flex pt-2'>
           <ul className='flex text-sm lg:space-x-5 text-info'>
-            <NavLink
-              className='pb-2 border-b-2 border-main hover:border-orange'
-              exact={true}
-              activeClassName='border-orange'
-              to='/favorite'
-              onClick={filterData()}
+            <li className='pb-2 border-b-2 cursor-pointer border-main hover:border-orange'>
+              Favorite
+            </li>
+            <li
+              onClick={() => filterData('USDT')}
+              className={`pb-2 border-b-2 border-main hover:border-orange cursor-pointer ${
+                usdtMarket && 'border-orange'
+              }`}
             >
-              <li>Favorite</li>
-            </NavLink>
-            <NavLink
-              className='pb-2 border-b-2 border-main hover:border-orange'
-              exact={true}
-              activeClassName='border-orange'
-              to='/USDT'
-              onClick={filterData()}
+              USDT
+            </li>
+            <li
+              onClick={() => filterData('BTC')}
+              className={`pb-2 border-b-2 border-main hover:border-orange cursor-pointer ${
+                btcMarket && 'border-orange'
+              }`}
             >
-              <li>USDT</li>
-            </NavLink>
-            <NavLink
-              className='pb-2 border-b-2 border-main hover:border-orange'
-              exact={true}
-              activeClassName='border-orange'
-              to='/BTC'
-              onClick={filterData()}
+              BTC
+            </li>
+            <li
+              onClick={() => filterData('ETH')}
+              className={`pb-2 border-b-2 border-main hover:border-orange cursor-pointer ${
+                ethMarket && 'border-orange'
+              }`}
             >
-              <li>BTC</li>
-            </NavLink>
-            <NavLink
-              className='pb-2 border-b-2 border-main hover:border-orange'
-              exact={true}
-              activeClassName='border-orange'
-              to='/ETH'
-              onClick={filterData()}
-            >
-              <li>ETH</li>
-            </NavLink>
+              ETH
+            </li>
           </ul>
           <span className='flex items-center pb-2 ml-auto text-minor'>
             <RightOutlined />
@@ -95,7 +120,11 @@ const MarketList = (props) => {
           <tbody>
             {sortData.map((item, index) => {
               return (
-                <tr key={index}>
+                <tr
+                  onClick={() => handleRowClick(item.s)}
+                  className='hover:bg-info hover:bg-opacity-25'
+                  key={index}
+                >
                   <td>
                     <div className='flex items-center justify-end mr-1 text-sm text-info'>
                       <StarOulined />
@@ -119,6 +148,7 @@ const MarketList = (props) => {
                     {item.P > 0 && '+'}
                     {parseFloat(item.P).toFixed(2)}
                   </td>
+                  <td></td>
                 </tr>
               );
             })}
@@ -135,7 +165,9 @@ const MarketList = (props) => {
           <MenuUnfoldOutlined />
         </button>
       </div>
-      <div className='py-1 text-base text-center text-white bg-third'>{id}</div>
+      <div className='py-1 text-base text-center text-white bg-third'>
+        {market}
+      </div>
       <div className='py-1 text-sm text-center border-t border-b border-opacity-25 bg-main text-info border-info'>
         Market
       </div>

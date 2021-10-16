@@ -9,7 +9,7 @@ const App = () => {
           <Route path='/' exact>
             <MainLayout />
           </Route>
-          <Route path='/:id'>
+          <Route path='/market/:coin' exact>
             <MainLayout />
           </Route>
         </Switch>
