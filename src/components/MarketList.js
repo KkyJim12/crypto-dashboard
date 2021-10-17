@@ -49,6 +49,11 @@ const MarketList = (props) => {
     sortData.sort((a, b) => (a.s > b.s ? 1 : -1));
   };
 
+  const filterBySearch = (value) => {
+    sortData.filter((i) => i.s.includes(value));
+    sortData.sort((a, b) => (a.s > b.s ? 1 : -1));
+  };
+
   const largeSideMenu = (
     <div className='bg-main'>
       <div className='px-4 pt-2 border-b border-opacity-25 border-info bg-third'>
@@ -58,6 +63,7 @@ const MarketList = (props) => {
               <SearchOutlined />
             </div>
             <input
+              onChange={(e) => filterBySearch(e.target.value)}
               className='p-1 text-sm text-white border outline-none bg-third border-minor placeholder-minor hover:border-orange focus:border-orange pl-7'
               type='text'
               placeholder='Search'
