@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 import RightOutlined from '@ant-design/icons/RightOutlined';
 import SearchOutlined from '@ant-design/icons/SearchOutlined';
 import MenuUnfoldOutlined from '@ant-design/icons/MenuUnfoldOutlined';
@@ -120,7 +121,7 @@ const MarketList = (props) => {
               return (
                 <tr
                   onClick={() => handleRowClick(item.s)}
-                  className='hover:bg-info hover:bg-opacity-25'
+                  className='cursor-pointer hover:bg-info hover:bg-opacity-25'
                   key={index}
                 >
                   <td>
@@ -175,11 +176,11 @@ const MarketList = (props) => {
       >
         {sortData.map((item, index) => {
           return (
-            <a key={item.s} href='/'>
+            <Link key={item.s} to={`/market/${item.s}`}>
               <div className='py-1 text-xs text-center text-white hover:bg-third'>
                 {item.s}
               </div>
-            </a>
+            </Link>
           );
         })}
       </div>

@@ -5,6 +5,7 @@ import Tradingview from 'components/Tradingview';
 import Exchange from 'components/Exchange';
 import Orderbook from 'components/Orderbook';
 import MarketTrade from 'components/MarketTrade';
+import Footer from 'components/Footer';
 
 const MainLayout = () => {
   const [marketList, setMarketList] = useState([]);
@@ -43,8 +44,8 @@ const MainLayout = () => {
   return (
     <div className='bg-secondary'>
       <Navbar />
-      <div className='h-screen'>
-        <div className='grid grid-cols-12' style={{ height: '80vh' }}>
+      <div style={{ height: '90vh' }}>
+        <div className='grid grid-cols-12' style={{ height: '100%' }}>
           <div
             className={`${sideMenu ? 'col-span-2 ' : 'col-span-1'} p-1 bg-main`}
           >
@@ -74,6 +75,7 @@ const MainLayout = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
