@@ -102,7 +102,6 @@ const MarketList = (props) => {
 
     ws.onmessage = (event) => {
       let x = JSON.parse(event.data);
-      console.log(x);
 
       if (x.length > 0) {
         x.sort((a, b) => (a.s > b.s ? 1 : -1));
