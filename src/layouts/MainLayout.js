@@ -8,34 +8,7 @@ import MarketTrade from 'components/MarketTrade';
 import Footer from 'components/Footer';
 
 const MainLayout = () => {
-  const [marketList, setMarketList] = useState([]);
   const [sideMenu, setSideMenu] = useState(true);
-
-  useEffect(() => {
-    const ws = new WebSocket('wss://stream.binance.com:9443/ws');
-
-    const msg = {
-      method: 'SUBSCRIBE',
-      params: ['!ticker@arr'],
-      id: 1,
-    };
-
-    ws.onopen = () => {
-      ws.send(JSON.stringify(msg));
-    };
-
-    ws.onmessage = (event) => {
-      let x = JSON.parse(event.data);
-
-      if (x.length > 0) {
-        setMarketList(x);
-      }
-    };
-
-    return () => {
-      ws.close();
-    };
-  }, []);
 
   const changeSideMenu = () => {
     setSideMenu(!sideMenu);
@@ -49,11 +22,7 @@ const MainLayout = () => {
           <div
             className={`${sideMenu ? 'col-span-2 ' : 'col-span-1'} p-1 bg-main`}
           >
-            <MarketList
-              data={marketList}
-              sideMenu={sideMenu}
-              changeSideMenu={changeSideMenu}
-            />
+            <MarketList sideMenu={sideMenu} changeSideMenu={changeSideMenu} />
           </div>
           <div
             className={`${

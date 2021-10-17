@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import RightOutlined from '@ant-design/icons/RightOutlined';
@@ -11,14 +11,15 @@ const MarketList = (props) => {
   const sideMenu = props.sideMenu;
   const changeSideMenu = props.changeSideMenu;
 
+  const [search, setSearch] = useState('');
+
+  const [marketList, setMarketList] = useState([]);
+
   const [market, setMarket] = useState('USDT');
 
   const [usdtMarket, setUsdtMarket] = useState(true);
   const [btcMarket, setBtcMarket] = useState(false);
   const [ethMarket, setEthMarket] = useState(false);
-
-  let initData = props.data.filter((i) => i.s.includes(market));
-  let sortData = initData.sort((a, b) => (a.s > b.s ? 1 : -1));
 
   const handleRowClick = (filterByCoin) => {
     history.push(`/market/${filterByCoin}`);
@@ -45,14 +46,44 @@ const MarketList = (props) => {
     }
 
     setMarket(filterByMarket);
-    sortData.filter((i) => i.s.includes(filterByMarket));
+    let sortData = [...marketList].filter((i) => i.s.includes(market));
     sortData.sort((a, b) => (a.s > b.s ? 1 : -1));
+    setMarketList(sortData);
   };
 
   const filterBySearch = (value) => {
-    sortData.filter((i) => i.s.includes(value));
+    setSearch(value);
+    let sortData = [...marketList].filter((i) => i.s.includes(search));
     sortData.sort((a, b) => (a.s > b.s ? 1 : -1));
+    setMarketList(sortData);
   };
+
+  useEffect(() => {
+    const ws = new WebSocket('wss://stream.binance.com:9443/ws');
+
+    const msg = {
+      method: 'SUBSCRIBE',
+      params: ['!ticker@arr'],
+      id: 1,
+    };
+
+    ws.onopen = () => {
+      ws.send(JSON.stringify(msg));
+    };
+
+    ws.onmessage = (event) => {
+      let x = JSON.parse(event.data);
+
+      if (x.length > 0) {
+        x.sort((a, b) => (a.s > b.s ? 1 : -1));
+        setMarketList(x);
+      }
+    };
+
+    return () => {
+      ws.close();
+    };
+  }, []);
 
   const largeSideMenu = (
     <div className='bg-main'>
@@ -123,7 +154,7 @@ const MarketList = (props) => {
             </tr>
           </thead>
           <tbody>
-            {sortData.map((item, index) => {
+            {marketList.map((item, index) => {
               return (
                 <tr
                   onClick={() => handleRowClick(item.s)}
@@ -180,7 +211,7 @@ const MarketList = (props) => {
         className='flex flex-col overflow-y-scroll'
         style={{ height: '80vh' }}
       >
-        {sortData.map((item, index) => {
+        {marketList.map((item, index) => {
           return (
             <Link key={item.s} to={`/market/${item.s}`}>
               <div className='py-1 text-xs text-center text-white hover:bg-third'>
