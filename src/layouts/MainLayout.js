@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import MarketList from 'components/MarketList';
 import Navbar from 'components/Navbar';
 import Tradingview from 'components/Tradingview';

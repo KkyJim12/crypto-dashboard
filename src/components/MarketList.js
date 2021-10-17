@@ -5,6 +5,7 @@ import RightOutlined from '@ant-design/icons/RightOutlined';
 import SearchOutlined from '@ant-design/icons/SearchOutlined';
 import MenuUnfoldOutlined from '@ant-design/icons/MenuUnfoldOutlined';
 import StarOulined from '@ant-design/icons/StarOutlined';
+import axios from 'axios';
 
 const MarketList = (props) => {
   const history = useHistory();
@@ -15,6 +16,7 @@ const MarketList = (props) => {
 
   const [marketList, setMarketList] = useState([]);
 
+  const [initMarketList, setInitMarketList] = useState([]);
   const [market, setMarket] = useState('USDT');
 
   const [usdtMarket, setUsdtMarket] = useState(true);
@@ -46,19 +48,46 @@ const MarketList = (props) => {
     }
 
     setMarket(filterByMarket);
-    let sortData = [...marketList].filter((i) => i.s.includes(market));
+    let sortData = [...initMarketList].filter(
+      (i) => i.s.includes(search) && i.s.includes(filterByMarket)
+    );
     sortData.sort((a, b) => (a.s > b.s ? 1 : -1));
     setMarketList(sortData);
   };
 
   const filterBySearch = (value) => {
     setSearch(value);
-    let sortData = [...marketList].filter((i) => i.s.includes(search));
+    let sortData = [...initMarketList].filter(
+      (i) => i.s.includes(search) && i.s.includes(market)
+    );
     sortData.sort((a, b) => (a.s > b.s ? 1 : -1));
     setMarketList(sortData);
   };
 
+  const getMarketList = async () => {
+    try {
+      const response = await axios.get(
+        process.env.REACT_APP_API_URL + '/market/list'
+      );
+
+      for (let i = 0; i < response.data.data.length; i++) {
+        response.data.data[i].s = response.data.data[i].symbol;
+        response.data.data[i].P = response.data.data[i].priceChange;
+        response.data.data[i].c = response.data.data[i].lastPrice;
+      }
+
+      let sortData = response.data.data.sort((a, b) => (a.s > b.s ? 1 : -1));
+
+      setMarketList(sortData);
+      setInitMarketList(sortData);
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+
   useEffect(() => {
+    getMarketList();
+
     const ws = new WebSocket('wss://stream.binance.com:9443/ws');
 
     const msg = {
@@ -73,10 +102,10 @@ const MarketList = (props) => {
 
     ws.onmessage = (event) => {
       let x = JSON.parse(event.data);
+      console.log(x);
 
       if (x.length > 0) {
         x.sort((a, b) => (a.s > b.s ? 1 : -1));
-        setMarketList(x);
       }
     };
 
