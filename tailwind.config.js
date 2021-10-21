@@ -18,6 +18,10 @@ module.exports = {
       danger: "#eb4d5c",
       orange: "#f67e2f",
     },
+    rotate: {
+      90: "90deg",
+      270: "270deg",
+    },
   },
   variants: {
     extend: {},
