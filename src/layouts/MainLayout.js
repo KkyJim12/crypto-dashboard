@@ -17,18 +17,25 @@ const MainLayout = () => {
 
   return (
     <div className="bg-secondary">
-      <Navbar />
+      <div className="hidden lg:block">
+        <Navbar />
+      </div>
       <div style={{ height: "90vh" }}>
-        <div className="grid grid-cols-12" style={{ height: "100%" }}>
+        <div
+          className="grid grid-cols-12 gap-y-4 lg:gap-y-0"
+          style={{ height: "100%" }}
+        >
           <div
-            className={`${sideMenu ? "col-span-2 " : "col-span-1"} p-1 bg-main`}
+            className={`${
+              sideMenu ? "lg:col-span-2 " : "lg:col-span-1"
+            } col-span-12 p-1 bg-main`}
           >
             <MarketList sideMenu={sideMenu} changeSideMenu={changeSideMenu} />
           </div>
           <div
             className={`${
-              sideMenu ? "col-span-6" : "col-span-7"
-            } p-1 flex flex-col lg:space-y-1`}
+              sideMenu ? "lg:col-span-6" : "lg:col-span-7"
+            } col-span-12 p-1 flex flex-col space-y-4 lg:space-y-1`}
           >
             <div className="flex-shirnk">
               <CoinInfo />
@@ -40,15 +47,17 @@ const MainLayout = () => {
               <Exchange />
             </div>
           </div>
-          <div className="col-span-2 p-1">
+          <div className="col-span-12 lg:col-span-2 p-1">
             <Orderbook />
           </div>
-          <div className="col-span-2 p-1">
+          <div className="col-span-12 lg:col-span-2 p-1">
             <MarketTrade />
           </div>
         </div>
       </div>
-      <Footer />
+      <div className="hidden lg:block">
+        <Footer />
+      </div>
     </div>
   );
 };

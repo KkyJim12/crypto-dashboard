@@ -31,7 +31,7 @@ const CoinInfo = () => {
   }, [coin]);
 
   return (
-    <div className="flex h-12 py-2 px-4 bg-third items-center lg:space-x-4">
+    <div className="flex flex-col lg:flex-row h-36 lg:h-12 py-2 px-4 bg-third items-center lg:space-x-4">
       <span className="text-xl text-white">{coinData.s}</span>
       <div className="flex flex-1 flex-col">
         <span className="text-info text-base">
@@ -41,8 +41,8 @@ const CoinInfo = () => {
           ≈ {parseFloat(coinData.c).toFixed(2)}
         </span>
       </div>
-      <div className="flex flex-shrink lg:space-x-4">
-        <div className="flex flex-col text-right">
+      <div className="flex flex-shrink space-x-4">
+        <div className="flex flex-col text-center lg:text-right">
           <span className="text-info text-sm">Change</span>
           <span
             className={`text-xs ${
@@ -53,19 +53,19 @@ const CoinInfo = () => {
             {coinData.P}
           </span>
         </div>
-        <div className="flex flex-col text-right">
+        <div className="flex flex-col text-center lg:text-right">
           <span className="text-info text-sm">High</span>
           <span className="text-white text-xs">
             {parseFloat(coinData.h).toFixed(4)}
           </span>
         </div>
-        <div className="flex flex-col text-right">
+        <div className="flex flex-col text-center lg:text-right">
           <span className="text-info text-sm">Low</span>
           <span className="text-white text-xs">
             {parseFloat(coinData.l).toFixed(4)}
           </span>
         </div>
-        <div className="flex flex-col text-right">
+        <div className="flex flex-col text-center lg:text-right">
           <span className="text-info text-sm">24H Vol</span>
           <span className="text-white text-xs">
             {parseFloat(coinData.v).toFixed(2)}

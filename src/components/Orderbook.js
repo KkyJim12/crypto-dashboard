@@ -97,7 +97,7 @@ const Orderbook = () => {
               {ask.length > 0 && parseFloat(ask[0][0]).toFixed(2)}
             </h1>
           </div>
-          <div className="flex flex-shrink items-center lg:space-x-1">
+          <div className="flex flex-shrink items-center space-x-2 lg:space-x-1">
             <span className="text-white text-xs">{decimal}</span>
             <div className="mb-2">
               <button
@@ -188,7 +188,7 @@ const Orderbook = () => {
             {ask.length > 0 && parseFloat(ask[0][0]).toFixed(2)}
           </h1>
         </div>
-        <div className="flex flex-shrink items-center lg:space-x-1">
+        <div className="flex flex-shrink items-center space-x-2 lg:space-x-1">
           <span className="text-white text-xs">{decimal}</span>
           <div className="mb-2">
             <button
@@ -218,7 +218,7 @@ const Orderbook = () => {
             {ask.length > 0 && parseFloat(ask[0][0]).toFixed(2)}
           </h1>
         </div>
-        <div className="flex flex-shrink items-center lg:space-x-1">
+        <div className="flex flex-shrink items-center space-x-2 lg:space-x-1">
           <span className="text-white text-xs">{decimal}</span>
           <div className="mb-2">
             <button
@@ -275,7 +275,7 @@ const Orderbook = () => {
       <div className="flex flex-col h-full">
         <div className="bg-third flex items-center px-3 py-2">
           <h1 className=" text-white">Orderbook</h1>
-          <div className="flex ml-auto lg:space-x-4">
+          <div className="flex ml-auto space-x-2 lg:space-x-4">
             <button
               onClick={() => changeList("bidAndask")}
               className="flex transform text-info text-sm"
