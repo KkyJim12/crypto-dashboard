@@ -19,7 +19,7 @@ const MainLayout = () => {
 
   return (
     <div className="bg-secondary">
-      <div className="w-screen">
+      <div>
         <div
           className="grid grid-cols-12 gap-y-4 lg:gap-y-0"
           style={{ height: "100%" }}
