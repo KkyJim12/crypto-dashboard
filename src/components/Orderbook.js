@@ -211,6 +211,15 @@ const Orderbook = () => {
 
   const askFormat = (
     <div className="w-full bg-main h-full">
+      <table className="w-full table-fixed">
+        <thead className="text-xs border-t border-b border-opacity-25 text-info border-info bg-third">
+          <tr>
+            <th className="w-4/12 py-1 pl-2 font-medium text-left">Price</th>
+            <th className="w-4/12 py-1 font-medium text-right">Amount</th>
+            <th className="w-4/12 py-1 pr-2 font-medium text-right">Sum</th>
+          </tr>
+        </thead>
+      </table>
       <div className="bg-third flex items-center px-3 py-2">
         <div className="flex flex-1">
           <h1 className="text-white">
@@ -237,6 +246,13 @@ const Orderbook = () => {
         </div>
       </div>
       <table className="w-full table-fixed">
+        <thead>
+          <tr>
+            <th className="w-4/12 py-1 pl-2 font-medium text-left"></th>
+            <th className="w-4/12 py-1 font-medium text-right"></th>
+            <th className="w-4/12 py-1 pr-2 font-medium text-right"></th>
+          </tr>
+        </thead>
         <tbody>
           {ask.map((item, index) => {
             return (

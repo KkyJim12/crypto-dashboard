@@ -232,8 +232,8 @@ const Exchange = () => {
         <div className="flex flex-col">
           <div className="text-xs text-white">Custom policy:</div>
           <div className="mt-2 text-xs text-info">Available: 0 USDT 0 BTC</div>
-          <div className="flex mt-4 text-xs text-info">Price range:</div>
-          <div className="flex flex-col lg:flex-row mt-2">
+          <div className="flex mt-1 text-xs text-info">Price range:</div>
+          <div className="flex flex-col lg:flex-row mt-1">
             <div className="relative flex items-center flex-1">
               <input
                 placeholder="Lower"
@@ -345,14 +345,14 @@ const Exchange = () => {
               </div>
             </div>
           </div>
-          <div className="flex mt-4">
+          <div className="flex mt-2">
             <div className="text-xs text-info">Use the original BTC </div>
             <div class="flex items-center ml-8">
               <label for="toogleA" class="flex items-center cursor-pointer">
                 <div class="relative">
                   <input id="toogleA" type="checkbox" class="sr-only" />
-                  <div class="w-7 h-3 bg-orange bg-opacity-40 rounded-full shadow-inner"></div>
-                  <div class="dot absolute w-5 h-5 bg-orange  rounded-full shadow -left-1 -top-1 transition"></div>
+                  <div class="switch w-7 h-3 bg-info bg-opacity-40 rounded-full shadow-inner"></div>
+                  <div class="dot absolute w-5 h-5 bg-info  rounded-full shadow -left-1 -top-1 transition"></div>
                 </div>
               </label>
             </div>
@@ -371,14 +371,14 @@ const Exchange = () => {
         <div className="flex flex-col">
           <div className="text-xs text-white">AI policy：</div>
           <div className="mt-2 text-xs text-info">Available: 0 USDT 0 BTC</div>
-          <div className="flex items-center mt-2 text-xs text-info">
+          <div className="flex items-center mt-1 text-xs text-info">
             Price range:{" "}
             <div className="ml-auto">
               Seven-day annualized yield{" "}
-              <span className="text-lg text-success">52.22 %</span>
+              <span className="text-base text-success">52.22 %</span>
             </div>
           </div>
-          <div className="relative flex items-center mt-2">
+          <div className="relative flex items-center mt-1">
             <label className="absolute ml-3 text-sm text-info">
               <span className="text-base text-opacity-50 text-info">
                 58558.4800 ~ 71571.4700
@@ -448,14 +448,14 @@ const Exchange = () => {
               </div>
             </div>
           </div>
-          <div className="flex mt-4">
+          <div className="flex mt-2">
             <div className="text-xs text-info">Use the original BTC </div>
             <div class="flex items-center ml-8">
-              <label for="toogleA" class="flex items-center cursor-pointer">
+              <label for="toogleB" class="flex items-center cursor-pointer">
                 <div class="relative">
-                  <input id="toogleA" type="checkbox" class="sr-only" />
-                  <div class="w-7 h-3 bg-orange bg-opacity-40 rounded-full shadow-inner"></div>
-                  <div class="dot absolute w-5 h-5 bg-orange  rounded-full shadow -left-1 -top-1 transition"></div>
+                  <input id="toogleB" type="checkbox" class="sr-only" />
+                  <div class="switch w-7 h-3 bg-info bg-opacity-40 rounded-full shadow-inner"></div>
+                  <div class="dot absolute w-5 h-5 bg-info  rounded-full shadow -left-1 -top-1 transition"></div>
                 </div>
               </label>
             </div>

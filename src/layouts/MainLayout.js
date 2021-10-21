@@ -1,6 +1,8 @@
 import { useState } from "react";
-import MarketList from "components/MarketList";
+import { isMobile } from "react-device-detect";
 import Navbar from "components/Navbar";
+import MobileNav from "components/MobileNav";
+import MarketList from "components/MarketList";
 import CoinInfo from "components/CoinInfo";
 import Tradingview from "components/Tradingview";
 import Exchange from "components/Exchange";
@@ -17,14 +19,14 @@ const MainLayout = () => {
 
   return (
     <div className="bg-secondary">
-      <div className="hidden lg:block">
-        <Navbar />
-      </div>
-      <div style={{ height: "90vh" }}>
+      <div className="w-screen">
         <div
           className="grid grid-cols-12 gap-y-4 lg:gap-y-0"
           style={{ height: "100%" }}
         >
+          <div className="col-span-12">
+            {isMobile ? <MobileNav /> : <Navbar />}
+          </div>
           <div
             className={`${
               sideMenu ? "lg:col-span-2 " : "lg:col-span-1"
@@ -54,9 +56,9 @@ const MainLayout = () => {
             <MarketTrade />
           </div>
         </div>
-      </div>
-      <div className="hidden lg:block">
-        <Footer />
+        <div className="col-span-12">
+          <Footer />
+        </div>
       </div>
     </div>
   );
