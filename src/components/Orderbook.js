@@ -108,6 +108,7 @@ const Orderbook = () => {
                   key={index}
                   style={{
                     backgroundImage: `linear-gradient(to right, #382a38 ${item.percent}%, #1d2635 0%`,
+                    backgroundAttachment: "fixed",
                   }}
                 >
                   <td className="pl-2 text-xs text-left text-danger">
@@ -159,6 +160,7 @@ const Orderbook = () => {
                   key={index}
                   style={{
                     backgroundImage: `linear-gradient(to right, #253a3a ${item.percent}%, #1d2635 0%`,
+                    backgroundAttachment: "fixed",
                   }}
                 >
                   <td className="pl-2 text-xs text-left text-success">
@@ -196,6 +198,7 @@ const Orderbook = () => {
                 key={index}
                 style={{
                   backgroundImage: `linear-gradient(to right, #382a38 ${item.percent}%, #1d2635 0%`,
+                  backgroundAttachment: "fixed",
                 }}
               >
                 <td className="pl-2 text-xs text-left text-danger">
@@ -300,6 +303,7 @@ const Orderbook = () => {
                 key={index}
                 style={{
                   backgroundImage: `linear-gradient(to right, #253a3a ${item.percent}%, #1d2635 0%`,
+                  backgroundAttachment: "fixed",
                 }}
               >
                 <td className="pl-2 text-xs text-left text-success">
