@@ -46,6 +46,40 @@ const Orderbook = () => {
     ws.onmessage = (event) => {
       let x = JSON.parse(event.data);
       if (x.bids !== undefined) {
+        // Find bids max Volume
+
+        for (let i = 0; i < x.bids.length; i++) {
+          x.bids[i].sum = x.bids[i][0] * x.bids[i][1];
+        }
+
+        let bidsMaxVolume = 0;
+
+        for (let k = 0; k < x.bids.length; k++) {
+          bidsMaxVolume = bidsMaxVolume + parseFloat(x.bids[k].sum);
+        }
+
+        for (let l = 0; l < x.bids.length; l++) {
+          x.bids[l].percent = Math.round((x.bids[l].sum / bidsMaxVolume) * 100);
+        }
+
+        // Find asks max volume
+
+        for (let j = 0; j < x.asks.length; j++) {
+          x.asks[j].sum = x.asks[j][0] * x.asks[j][1];
+        }
+
+        let asksMaxVolume = 0;
+
+        for (let m = 0; m < x.asks.length; m++) {
+          asksMaxVolume = asksMaxVolume + parseFloat(x.bids[m].sum);
+        }
+
+        for (let n = 0; n < x.asks.length; n++) {
+          x.asks[n].percent = Math.round((x.asks[n].sum / asksMaxVolume) * 100);
+        }
+
+        x.asks.sort((a, b) => b[0] - a[0]);
+
         setBids(x.bids);
         setAsk(x.asks);
       }
@@ -68,9 +102,14 @@ const Orderbook = () => {
             </tr>
           </thead>
           <tbody>
-            {bids.map((item, index) => {
+            {ask.map((item, index) => {
               return (
-                <tr key={index}>
+                <tr
+                  key={index}
+                  style={{
+                    backgroundImage: `linear-gradient(to right, #382a38 ${item.percent}%, #1d2635 0%`,
+                  }}
+                >
                   <td className="pl-2 text-xs text-left text-danger">
                     {parseFloat(item[0]).toFixed(decimal)}
                   </td>
@@ -78,10 +117,7 @@ const Orderbook = () => {
                     {parseFloat(item[1]).toFixed(2)}
                   </td>
                   <td className="pr-2 text-xs text-right text-info">
-                    {(
-                      parseFloat(item[0]).toFixed(6) *
-                      parseFloat(item[1]).toFixed(2)
-                    ).toFixed(4)}
+                    {parseFloat(item.sum).toFixed(4)}
                   </td>
                 </tr>
               );
@@ -93,8 +129,8 @@ const Orderbook = () => {
         <div className="bg-third flex items-center px-3 py-2">
           <div className="flex flex-1">
             <h1 className="text-white">
-              {ask.length > 0 && parseFloat(ask[0][0]).toFixed(4)} ≈{" "}
-              {ask.length > 0 && parseFloat(ask[0][0]).toFixed(2)}
+              {ask.length > 0 && parseFloat(ask[19][0]).toFixed(4)} ≈{" "}
+              {ask.length > 0 && parseFloat(ask[19][0]).toFixed(2)}
             </h1>
           </div>
           <div className="flex flex-shrink items-center space-x-2 lg:space-x-1">
@@ -117,9 +153,14 @@ const Orderbook = () => {
         </div>
         <table className="w-full table-fixed">
           <tbody>
-            {ask.map((item, index) => {
+            {bids.map((item, index) => {
               return (
-                <tr key={index}>
+                <tr
+                  key={index}
+                  style={{
+                    backgroundImage: `linear-gradient(to right, #253a3a ${item.percent}%, #1d2635 0%`,
+                  }}
+                >
                   <td className="pl-2 text-xs text-left text-success">
                     {parseFloat(item[0]).toFixed(decimal)}
                   </td>
@@ -127,10 +168,7 @@ const Orderbook = () => {
                     {parseFloat(item[1]).toFixed(2)}
                   </td>
                   <td className="pr-2 text-xs text-right text-info">
-                    {(
-                      parseFloat(item[0]).toFixed(6) *
-                      parseFloat(item[1]).toFixed(2)
-                    ).toFixed(4)}
+                    {parseFloat(item.sum).toFixed(4)}
                   </td>
                 </tr>
               );
@@ -152,9 +190,14 @@ const Orderbook = () => {
           </tr>
         </thead>
         <tbody>
-          {bids.map((item, index) => {
+          {ask.map((item, index) => {
             return (
-              <tr key={index}>
+              <tr
+                key={index}
+                style={{
+                  backgroundImage: `linear-gradient(to right, #382a38 ${item.percent}%, #1d2635 0%`,
+                }}
+              >
                 <td className="pl-2 text-xs text-left text-danger">
                   {parseFloat(item[0]).toFixed(decimal)}
                 </td>
@@ -162,10 +205,7 @@ const Orderbook = () => {
                   {parseFloat(item[1]).toFixed(2)}
                 </td>
                 <td className="pr-2 text-xs text-right text-info">
-                  {(
-                    parseFloat(item[0]).toFixed(6) *
-                    parseFloat(item[1]).toFixed(2)
-                  ).toFixed(4)}
+                  {parseFloat(item.sum).toFixed(4)}
                 </td>
               </tr>
             );
@@ -184,8 +224,8 @@ const Orderbook = () => {
       <div className="bg-third flex items-center px-3 py-2">
         <div className="flex flex-1">
           <h1 className="text-white">
-            {ask.length > 0 && parseFloat(ask[0][0]).toFixed(4)} ≈{" "}
-            {ask.length > 0 && parseFloat(ask[0][0]).toFixed(2)}
+            {ask.length > 0 && parseFloat(ask[19][0]).toFixed(4)} ≈{" "}
+            {ask.length > 0 && parseFloat(ask[19][0]).toFixed(2)}
           </h1>
         </div>
         <div className="flex flex-shrink items-center space-x-2 lg:space-x-1">
@@ -223,8 +263,8 @@ const Orderbook = () => {
       <div className="bg-third flex items-center px-3 py-2">
         <div className="flex flex-1">
           <h1 className="text-white">
-            {ask.length > 0 && parseFloat(ask[0][0]).toFixed(4)} ≈{" "}
-            {ask.length > 0 && parseFloat(ask[0][0]).toFixed(2)}
+            {ask.length > 0 && parseFloat(ask[19][0]).toFixed(4)} ≈{" "}
+            {ask.length > 0 && parseFloat(ask[19][0]).toFixed(2)}
           </h1>
         </div>
         <div className="flex flex-shrink items-center space-x-2 lg:space-x-1">
@@ -254,9 +294,14 @@ const Orderbook = () => {
           </tr>
         </thead>
         <tbody>
-          {ask.map((item, index) => {
+          {bids.map((item, index) => {
             return (
-              <tr key={index}>
+              <tr
+                key={index}
+                style={{
+                  backgroundImage: `linear-gradient(to right, #253a3a ${item.percent}%, #1d2635 0%`,
+                }}
+              >
                 <td className="pl-2 text-xs text-left text-success">
                   {parseFloat(item[0]).toFixed(decimal)}
                 </td>

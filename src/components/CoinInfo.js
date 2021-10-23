@@ -1,8 +1,13 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
+import LineChartOutlined from "@ant-design/icons/LineChartOutlined";
+import BarChartOutlined from "@ant-design/icons/BarChartOutlined";
 
-const CoinInfo = () => {
+const CoinInfo = (props) => {
   let { coin } = useParams();
+
+  let chart = props.chart;
+  let handleChart = props.handleChart;
 
   const [coinData, setCoinData] = useState([]);
 
@@ -70,6 +75,24 @@ const CoinInfo = () => {
           <span className="text-white text-xs">
             {parseFloat(coinData.v).toFixed(2)}
           </span>
+        </div>
+      </div>
+      <div className="mr-2 flex space-x-2 ">
+        <div
+          onClick={() => handleChart("Tradingview")}
+          className={`cursor-pointer ${
+            chart === "Tradingview" ? "text-orange" : "text-info"
+          }`}
+        >
+          <LineChartOutlined />
+        </div>
+        <div
+          onClick={() => handleChart("Volumechart")}
+          className={`cursor-pointer ${
+            chart === "Volumechart" ? "text-orange" : "text-info"
+          }`}
+        >
+          <BarChartOutlined />
         </div>
       </div>
     </div>

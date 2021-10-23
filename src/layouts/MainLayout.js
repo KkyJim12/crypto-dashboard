@@ -5,6 +5,7 @@ import MobileNav from "components/MobileNav";
 import MarketList from "components/MarketList";
 import CoinInfo from "components/CoinInfo";
 import Tradingview from "components/Tradingview";
+import VolumeChart from "components/VolumeChart";
 import Exchange from "components/Exchange";
 import Orderbook from "components/Orderbook";
 import MarketTrade from "components/MarketTrade";
@@ -12,9 +13,16 @@ import Footer from "components/Footer";
 
 const MainLayout = () => {
   const [sideMenu, setSideMenu] = useState(true);
+  const [chart, setChart] = useState("Tradingview");
+
+  let orderBookVolume = [];
 
   const changeSideMenu = () => {
     setSideMenu(!sideMenu);
+  };
+
+  const changeChart = (type) => {
+    setChart(type);
   };
 
   return (
@@ -40,17 +48,17 @@ const MainLayout = () => {
             } col-span-12 p-1 flex flex-col space-y-4 lg:space-y-1`}
           >
             <div className="flex-shirnk">
-              <CoinInfo />
+              <CoinInfo chart={chart} handleChart={changeChart} />
             </div>
             <div className="flex-1">
-              <Tradingview />
+              {chart === "Tradingview" ? <Tradingview /> : <VolumeChart />}
             </div>
             <div className="flex-1">
               <Exchange />
             </div>
           </div>
           <div className="col-span-12 lg:col-span-2 p-1">
-            <Orderbook />
+            <Orderbook data={orderBookVolume} />
           </div>
           <div className="col-span-12 lg:col-span-2 p-1">
             <MarketTrade />
