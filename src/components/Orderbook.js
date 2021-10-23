@@ -50,7 +50,7 @@ const Orderbook = () => {
         // Find bids max Volume
 
         for (let i = 0; i < x.bids.length; i++) {
-          x.bids[i].sum = x.bids[i][0] * x.bids[i][1];
+          x.bids[i].sum = parseFloat(x.bids[i][0] * x.bids[i][1]).toFixed(2);
         }
 
         let bidsMaxVolume = 0;
@@ -66,7 +66,7 @@ const Orderbook = () => {
         // Find asks max volume
 
         for (let j = 0; j < x.asks.length; j++) {
-          x.asks[j].sum = x.asks[j][0] * x.asks[j][1];
+          x.asks[j].sum = parseFloat(x.asks[j][0] * x.asks[j][1]).toFixed(2);
         }
 
         let asksMaxVolume = 0;
@@ -80,6 +80,8 @@ const Orderbook = () => {
         }
 
         x.asks.sort((a, b) => b[0] - a[0]);
+
+        console.log(x);
 
         setBids(x.bids);
         setAsk(x.asks);
