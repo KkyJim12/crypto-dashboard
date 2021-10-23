@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 import MenuUnfoldOutlined from "@ant-design/icons/MenuUnfoldOutlined";
 import PlusSquareOutlined from "@ant-design/icons/PlusSquareOutlined";
 import MinusSquareOutlined from "@ant-design/icons/MinusSquareOutlined";
+import { isMobile } from "react-device-detect";
 
 const Orderbook = () => {
   const [bids, setBids] = useState([]);
@@ -105,10 +106,10 @@ const Orderbook = () => {
             {ask.map((item, index) => {
               return (
                 <tr
+                  className={`${isMobile ? "bg-fixed" : "bg-local"}`}
                   key={index}
                   style={{
                     backgroundImage: `linear-gradient(to right, #382a38 ${item.percent}%, #1d2635 0%`,
-                    backgroundAttachment: "fixed",
                   }}
                 >
                   <td className="pl-2 text-xs text-left text-danger">
@@ -158,9 +159,9 @@ const Orderbook = () => {
               return (
                 <tr
                   key={index}
+                  className={`${isMobile ? "bg-fixed" : "bg-local"}`}
                   style={{
                     backgroundImage: `linear-gradient(to right, #253a3a ${item.percent}%, #1d2635 0%`,
-                    backgroundAttachment: "fixed",
                   }}
                 >
                   <td className="pl-2 text-xs text-left text-success">
@@ -196,9 +197,9 @@ const Orderbook = () => {
             return (
               <tr
                 key={index}
+                className={`${isMobile ? "bg-fixed" : "bg-local"}`}
                 style={{
                   backgroundImage: `linear-gradient(to right, #382a38 ${item.percent}%, #1d2635 0%`,
-                  backgroundAttachment: "fixed",
                 }}
               >
                 <td className="pl-2 text-xs text-left text-danger">
@@ -301,9 +302,9 @@ const Orderbook = () => {
             return (
               <tr
                 key={index}
+                className={`${isMobile ? "bg-fixed" : "bg-local"}`}
                 style={{
                   backgroundImage: `linear-gradient(to right, #253a3a ${item.percent}%, #1d2635 0%`,
-                  backgroundAttachment: "fixed",
                 }}
               >
                 <td className="pl-2 text-xs text-left text-success">
