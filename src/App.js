@@ -1,5 +1,5 @@
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Switch,
   Route,
   Redirect,
@@ -8,7 +8,7 @@ import MainLayout from 'layouts/MainLayout';
 
 const App = () => {
   return (
-    <Router>
+    <Router basename='/'>
       <div>
         <Switch>
           <Route path='/' exact>
