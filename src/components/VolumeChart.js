@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
-import Highcharts from "highcharts";
-import HighchartsReact from "highcharts-react-official";
-import { useParams } from "react-router";
+import { useState, useEffect } from 'react';
+import Highcharts from 'highcharts';
+import HighchartsReact from 'highcharts-react-official';
+import { useParams } from 'react-router';
 
 const VolumeChart = () => {
   let { coin } = useParams();
@@ -9,11 +9,13 @@ const VolumeChart = () => {
   const [ask, setAsk] = useState([]);
 
   useEffect(() => {
-    const ws = new WebSocket("wss://stream.binance.com:9443/ws");
+    const ws = new WebSocket(
+      `wss://stream.binance.com:9443/ws/${coin.toLowerCase()}@50`
+    );
 
     const msg = {
-      method: "SUBSCRIBE",
-      params: [`${coin.toLowerCase()}@depth20@1000ms`],
+      method: 'SUBSCRIBE',
+      params: [`${coin.toLowerCase()}@depth`],
       id: 1,
     };
 
@@ -23,20 +25,21 @@ const VolumeChart = () => {
 
     ws.onmessage = (event) => {
       let x = JSON.parse(event.data);
+      console.log(x);
 
-      if (x.bids !== undefined) {
-        for (let i = 0; i < x.bids.length; i++) {
-          x.bids[i][0] = parseFloat(x.bids[i][0]);
-          x.bids[i][1] = parseFloat(x.bids[i][1]);
+      if (x.b !== undefined) {
+        for (let i = 0; i < x.b.length; i++) {
+          x.b[i][0] = parseFloat(x.b[i][0]);
+          x.b[i][1] = parseFloat(x.b[i][1]);
         }
 
-        for (let j = 0; j < x.asks.length; j++) {
-          x.asks[j][0] = parseFloat(x.asks[j][0]);
-          x.asks[j][1] = parseFloat(x.asks[j][1]);
+        for (let j = 0; j < x.a.length; j++) {
+          x.a[j][0] = parseFloat(x.a[j][0]);
+          x.a[j][1] = parseFloat(x.a[j][1]);
         }
 
-        setBids(x.bids);
-        setAsk(x.asks);
+        setBids(x.b);
+        setAsk(x.a);
       }
     };
 
@@ -47,13 +50,13 @@ const VolumeChart = () => {
 
   const option = {
     chart: {
-      backgroundColor: "#192531",
-      type: "area",
-      zoomType: "xy",
+      backgroundColor: '#192531',
+      type: 'area',
+      zoomType: 'xy',
     },
     title: {
       style: {
-        color: "white",
+        color: 'white',
       },
       text: `${coin} Market Depth`,
     },
@@ -61,14 +64,14 @@ const VolumeChart = () => {
       minPadding: 0,
       maxPadding: 0,
       title: {
-        text: "Price",
+        text: 'Price',
         style: {
-          color: "white",
+          color: 'white',
         },
       },
       labels: {
         style: {
-          color: "white",
+          color: 'white',
         },
       },
     },
@@ -79,12 +82,12 @@ const VolumeChart = () => {
         title: null,
         tickWidth: 1,
         tickLength: 5,
-        tickPosition: "inside",
+        tickPosition: 'inside',
         labels: {
-          align: "left",
+          align: 'left',
           x: 8,
           style: {
-            color: "white",
+            color: 'white',
           },
         },
       },
@@ -96,12 +99,12 @@ const VolumeChart = () => {
         title: null,
         tickWidth: 1,
         tickLength: 5,
-        tickPosition: "inside",
+        tickPosition: 'inside',
         labels: {
-          align: "right",
+          align: 'right',
           x: -8,
           style: {
-            color: "white",
+            color: 'white',
           },
         },
       },
@@ -113,7 +116,7 @@ const VolumeChart = () => {
       area: {
         fillOpacity: 0.2,
         lineWidth: 1,
-        step: "center",
+        step: 'center',
       },
     },
     tooltip: {
@@ -123,14 +126,14 @@ const VolumeChart = () => {
     },
     series: [
       {
-        name: "Bids",
+        name: 'Bids',
         data: bids,
-        color: "#227b5f",
+        color: '#227b5f',
       },
       {
-        name: "Asks",
+        name: 'Asks',
         data: ask,
-        color: "#a3404d",
+        color: '#a3404d',
       },
     ],
   };
