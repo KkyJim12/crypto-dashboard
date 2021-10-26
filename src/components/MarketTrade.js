@@ -8,28 +8,28 @@ const MarketTrade = () => {
 
   const [tradeTransaction, setTradeTransaction] = useState([]);
 
-  const getInitTradeTransaction = async () => {
-    try {
-      const response = await axios.get(
-        process.env.REACT_APP_API_URL + '/' + coin
-      );
-
-      for (let i = 0; i < response.data.data.length; i++) {
-        response.data.data[i].p = response.data.data[i].price;
-        response.data.data[i].q = response.data.data[i].qty;
-        response.data.data[i].T = response.data.data[i].time;
-        response.data.data[i].m = response.data.data[i].isBuyerMaker;
-      }
-
-      response.data.data.sort((a, b) => b.T - a.T);
-
-      setTradeTransaction(response.data.data);
-    } catch (error) {
-      console.log(error.response);
-    }
-  };
-
   useEffect(() => {
+    const getInitTradeTransaction = async () => {
+      try {
+        const response = await axios.get(
+          process.env.REACT_APP_API_URL + '/' + coin
+        );
+
+        for (let i = 0; i < response.data.data.length; i++) {
+          response.data.data[i].p = response.data.data[i].price;
+          response.data.data[i].q = response.data.data[i].qty;
+          response.data.data[i].T = response.data.data[i].time;
+          response.data.data[i].m = response.data.data[i].isBuyerMaker;
+        }
+
+        response.data.data.sort((a, b) => b.T - a.T);
+
+        setTradeTransaction(response.data.data);
+      } catch (error) {
+        console.log(error.response);
+      }
+    };
+
     getInitTradeTransaction();
 
     const ws = new WebSocket('wss://stream.binance.com:9443/ws');
