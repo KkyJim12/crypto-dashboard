@@ -17,6 +17,9 @@ module.exports = {
       success: "#05ab63",
       danger: "#eb4d5c",
       orange: "#f67e2f",
+      regMain: "#673ab7",
+      regMinor: "#fafafa",
+      regThird: "#f9f9f9",
     },
     rotate: {
       90: "90deg",

@@ -3,19 +3,23 @@ import {
   Switch,
   Route,
   Redirect,
-} from 'react-router-dom';
-import MainLayout from 'layouts/MainLayout';
+} from "react-router-dom";
+import MainLayout from "layouts/MainLayout";
+import AuthLayout from "layouts/AuthLayout";
 
 const App = () => {
   return (
-    <Router basename='/'>
+    <Router basename="/">
       <div>
         <Switch>
-          <Route path='/' exact>
-            <Redirect to='/market/BTCUSDT' />
+          <Route path="/" exact>
+            <Redirect to="/market/BTCUSDT" />
           </Route>
-          <Route path='/market/:coin' exact>
+          <Route path="/market/:coin" exact>
             <MainLayout />
+          </Route>
+          <Route path="/login" exact>
+            <AuthLayout />
           </Route>
         </Switch>
       </div>
