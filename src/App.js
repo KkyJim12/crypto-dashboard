@@ -18,7 +18,7 @@ const App = () => {
           <Route path="/market/:coin" exact>
             <MainLayout />
           </Route>
-          <Route path="/login" exact>
+          <Route path="/register" exact>
             <AuthLayout />
           </Route>
         </Switch>

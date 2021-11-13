@@ -8,7 +8,7 @@ const AuthLayout = () => {
       <div className="grid grid-cols-7 min-h-screen">
         <div className="col-span-4">
           <img className="ml-10" src={Logo} alt="logo" />
-          <div className="flex flex-col items-center py-20 space-y-6 w-2/5 mx-auto">
+          <div className="flex flex-col items-center py-2 space-y-6 w-2/5 mx-auto">
             <h3 className="text-regMain text-2xl font-bold">Sign up</h3>
             <h5 style={{ color: "#9ea4b4" }} className="text-lg">
               Enter your credentials to continue
@@ -28,7 +28,61 @@ const AuthLayout = () => {
                 <hr></hr>
               </div>
             </div>
-            <div className="font-semibold text-sm">Sign up with Email address</div>
+            <div className="font-semibold text-sm">
+              Sign up with Email address
+            </div>
+            <div class="flex space-x-4 w-full">
+              <div class="flex flex-1">
+                <input
+                  class="px-2 py-4 border border-gray border-opacity-70 rounded-xl bg-gray bg-opacity-5 focus:outline-none w-full"
+                  placeholder="First Name"
+                  type="text"
+                />
+              </div>
+              <div class="flex flex-1">
+                <input
+                  class="px-2 py-4 border border-gray border-opacity-70 rounded-xl bg-gray bg-opacity-5 focus:outline-none w-full"
+                  placeholder="Last Name"
+                  type="text"
+                />
+              </div>
+            </div>
+            <div className="flex w-full">
+              <input
+                class="px-2 py-4 border border-gray border-opacity-70 rounded-xl bg-gray bg-opacity-5 focus:outline-none w-full"
+                placeholder="Email Address"
+                type="text"
+              />
+            </div>
+            <div className="flex w-full">
+              <input
+                class="px-2 py-4 border border-gray border-opacity-70 rounded-xl bg-gray bg-opacity-5 focus:outline-none w-full"
+                placeholder="Password"
+                type="password"
+              />
+            </div>
+            <div className="flex w-full items-center space-x-2">
+              <input
+                className="border-gray-200 border-2 h-4 w-4"
+                type="checkbox"
+              />{" "}
+              <span className="text-sm font-semibold">
+                Agree with terms and conditions
+              </span>
+            </div>
+            <div className="flex w-full">
+              <button
+                type="button"
+                className="bg-regMain w-full rounded py-2 text-white transform active:scale-90 duration-150"
+              >
+                Sign Up
+              </button>
+            </div>
+            <div className="flex border-t border-minor border-opacity-10 w-full justify-center pt-4">
+              <span className="text-sm font-semibold">
+                Already have an account?
+              </span>
+            </div>
           </div>
         </div>
         <div

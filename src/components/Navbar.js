@@ -5,8 +5,10 @@ import DownloadOutlined from "@ant-design/icons/DownloadOutlined";
 import SettingFilled from "@ant-design/icons/SettingFilled";
 import CaretDownFilled from "@ant-design/icons/CaretDownFilled";
 import { useState } from "react";
+import { useHistory } from "react-router";
 
 const Navbar = () => {
+  const history = useHistory();
   const [faqLink, setFaqLink] = useState(false);
   const [buyCryptoLink, setBuyCryptoLink] = useState(false);
   const [languageLink, setLanguageLink] = useState(false);
@@ -115,12 +117,14 @@ const Navbar = () => {
       <div className="flex h-full ml-auto">
         <div className="flex px-6 py-4 border-l border-r lg:space-x-4 border-info border-opacity-20">
           <button
+            onClick={() => history.push("/login")}
             type="button"
             className="px-5 py-1 text-info hover:bg-info hover:bg-opacity-25"
           >
             Log In
           </button>
           <button
+            onClick={() => history.push("/register")}
             type="button"
             className="px-5 py-1 border hover:text-orange text-info border-orange"
           >
