@@ -4,8 +4,9 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import MainLayout from "layouts/MainLayout";
-import AuthLayout from "layouts/AuthLayout";
+import Home from "pages/Home";
+import Register from "pages/Auth/Register";
+import Login from "pages/Auth/Login";
 
 const App = () => {
   return (
@@ -16,10 +17,13 @@ const App = () => {
             <Redirect to="/market/BTCUSDT" />
           </Route>
           <Route path="/market/:coin" exact>
-            <MainLayout />
+            <Home />
+          </Route>{" "}
+          <Route path="/login" exact>
+            <Login />
           </Route>
           <Route path="/register" exact>
-            <AuthLayout />
+            <Register />
           </Route>
         </Switch>
       </div>

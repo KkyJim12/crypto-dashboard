@@ -11,7 +11,7 @@ import Orderbook from "components/Orderbook";
 import MarketTrade from "components/MarketTrade";
 import Footer from "components/Footer";
 
-const MainLayout = () => {
+const Home = () => {
   const [sideMenu, setSideMenu] = useState(true);
   const [chart, setChart] = useState("Tradingview");
 
@@ -72,4 +72,4 @@ const MainLayout = () => {
   );
 };
 
-export default MainLayout;
+export default Home;
