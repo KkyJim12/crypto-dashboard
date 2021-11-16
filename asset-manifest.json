@@ -1,25 +1,26 @@
 {
   "files": {
-    "main.css": "/crypto-dashboard/static/css/main.b5a7204c.chunk.css",
-    "main.js": "/crypto-dashboard/static/js/main.d0fcbada.chunk.js",
-    "main.js.map": "/crypto-dashboard/static/js/main.d0fcbada.chunk.js.map",
-    "runtime-main.js": "/crypto-dashboard/static/js/runtime-main.7784fc9c.js",
-    "runtime-main.js.map": "/crypto-dashboard/static/js/runtime-main.7784fc9c.js.map",
-    "static/js/2.2910ea50.chunk.js": "/crypto-dashboard/static/js/2.2910ea50.chunk.js",
-    "static/js/2.2910ea50.chunk.js.map": "/crypto-dashboard/static/js/2.2910ea50.chunk.js.map",
-    "static/js/3.2ba18129.chunk.js": "/crypto-dashboard/static/js/3.2ba18129.chunk.js",
-    "static/js/3.2ba18129.chunk.js.map": "/crypto-dashboard/static/js/3.2ba18129.chunk.js.map",
+    "main.css": "/crypto-dashboard/static/css/main.5244fdce.chunk.css",
+    "main.js": "/crypto-dashboard/static/js/main.7727929a.chunk.js",
+    "main.js.map": "/crypto-dashboard/static/js/main.7727929a.chunk.js.map",
+    "runtime-main.js": "/crypto-dashboard/static/js/runtime-main.b44fa602.js",
+    "runtime-main.js.map": "/crypto-dashboard/static/js/runtime-main.b44fa602.js.map",
+    "static/js/2.6f1dec0e.chunk.js": "/crypto-dashboard/static/js/2.6f1dec0e.chunk.js",
+    "static/js/2.6f1dec0e.chunk.js.map": "/crypto-dashboard/static/js/2.6f1dec0e.chunk.js.map",
+    "static/js/3.0164660a.chunk.js": "/crypto-dashboard/static/js/3.0164660a.chunk.js",
+    "static/js/3.0164660a.chunk.js.map": "/crypto-dashboard/static/js/3.0164660a.chunk.js.map",
     "index.html": "/crypto-dashboard/index.html",
-    "static/css/main.b5a7204c.chunk.css.map": "/crypto-dashboard/static/css/main.b5a7204c.chunk.css.map",
-    "static/js/2.2910ea50.chunk.js.LICENSE.txt": "/crypto-dashboard/static/js/2.2910ea50.chunk.js.LICENSE.txt",
+    "static/css/main.5244fdce.chunk.css.map": "/crypto-dashboard/static/css/main.5244fdce.chunk.css.map",
+    "static/js/2.6f1dec0e.chunk.js.LICENSE.txt": "/crypto-dashboard/static/js/2.6f1dec0e.chunk.js.LICENSE.txt",
     "static/media/google.9887eb8e.svg": "/crypto-dashboard/static/media/google.9887eb8e.svg",
     "static/media/login.dd9f8992.svg": "/crypto-dashboard/static/media/login.dd9f8992.svg",
+    "static/media/profile.146f3c22.jpg": "/crypto-dashboard/static/media/profile.146f3c22.jpg",
     "static/media/register.66f0729d.svg": "/crypto-dashboard/static/media/register.66f0729d.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.7784fc9c.js",
-    "static/js/2.2910ea50.chunk.js",
-    "static/css/main.b5a7204c.chunk.css",
-    "static/js/main.d0fcbada.chunk.js"
+    "static/js/runtime-main.b44fa602.js",
+    "static/js/2.6f1dec0e.chunk.js",
+    "static/css/main.5244fdce.chunk.css",
+    "static/js/main.7727929a.chunk.js"
   ]
 }
