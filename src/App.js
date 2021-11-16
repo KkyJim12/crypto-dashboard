@@ -7,6 +7,7 @@ import {
 import Home from "pages/Home";
 import Register from "pages/Auth/Register";
 import Login from "pages/Auth/Login";
+import ManageLayout from "layouts/Manage/Index.js";
 
 const App = () => {
   return (
@@ -24,6 +25,9 @@ const App = () => {
           </Route>
           <Route path="/register" exact>
             <Register />
+          </Route>
+          <Route path="/manage/profile" exact>
+            <ManageLayout />
           </Route>
         </Switch>
       </div>

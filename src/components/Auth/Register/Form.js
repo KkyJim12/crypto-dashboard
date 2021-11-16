@@ -1,7 +1,8 @@
+import { Link } from "react-router-dom";
 import Google from "assets/google.svg";
 const RegisterForm = () => {
   return (
-    <div className="flex flex-col items-center py-2 space-y-6 w-2/5 mx-auto">
+    <div className="flex flex-col items-center py-2 space-y-6 md:w-2/5 w-full mx-auto px-6 md:px-0">
       <h3 className="text-regMain text-2xl font-bold">Sign up</h3>
       <h5 style={{ color: "#9ea4b4" }} className="text-lg">
         Enter your credentials to continue
@@ -67,7 +68,11 @@ const RegisterForm = () => {
         </button>
       </div>
       <div className="flex border-t border-minor border-opacity-10 w-full justify-center pt-4">
-        <span className="text-sm font-semibold">Already have an account?</span>
+        <Link to="/login">
+          <span className="text-sm font-semibold">
+            Already have an account?
+          </span>
+        </Link>
       </div>
     </div>
   );
